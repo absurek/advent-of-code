@@ -84,7 +84,7 @@ func decode(line string) int {
 }
 
 func main() {
-	file, err := os.Open("./assets/01-1.txt")
+	file, err := os.Open("./assets/01.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
