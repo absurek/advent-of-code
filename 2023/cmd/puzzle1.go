@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
+	"os"
 	"strconv"
-	"strings"
 )
 
 func decode(line string) int {
@@ -19,15 +21,16 @@ func decode(line string) int {
 }
 
 func main() {
-	input := `1abc2
-pqr3stu8vwx
-a1b2c3d4e5f
-treb7uchet`
+	file, err := os.Open("./assets/01-1.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 
 	sum := 0
-	lines := strings.Split(input, "\n")
-	for _, line := range lines {
-		sum += decode(line)
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		sum += decode(scanner.Text())
 	}
 
 	fmt.Println("sum: ", sum)
