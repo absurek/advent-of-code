@@ -68,29 +68,32 @@ func NewGames(path string) []Game {
 	return games
 }
 
-func bounds(game Game, red int, green int, blue int) int {
+func power(game Game) int {
+	red := 0
+	green := 0
+	blue := 0
 	for _, round := range game.rounds {
 		if round.Red > red {
-			return 0
+			red = round.Red
 		}
 
 		if round.Green > green {
-			return 0
+			green = round.Green
 		}
 
 		if round.Blue > blue {
-			return 0
+			blue = round.Blue
 		}
 	}
 
-	return game.ID
+	return red * green * blue
 }
 
 func main() {
 	games := NewGames("./assets/02.txt")
 	sum := 0
 	for _, game := range games {
-		sum += bounds(game, 12, 13, 14)
+		sum += power(game)
 	}
 
 	fmt.Println("sum: ", sum)
